@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор QR-коду</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #qrcode {
+            margin-right: 20px;
+        }
+        .warning {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wpisz imię i nazwisko</h1>
+    <input type="text" id="text" placeholder="Введіть текст або URL">
+    <button onclick="generateQR()">generuj kod biletu</button>
+    <div class="qr-container">
+        <div id="qrcode"></div>
+        <div class="warning" id="warning-text" style="display: none;">Nie zgub go.</div>
+    </div>
+
+    <script>
+        function generateQR() {
+            let qrDiv = document.getElementById("qrcode");
+            let warningText = document.getElementById("warning-text");
+            qrDiv.innerHTML = "";
+            let text = document.getElementById("text").value;
+            if (text.trim() !== "") {
+                new QRCode(qrDiv, text);
+                warningText.style.display = "block";
+            } else {
+                warningText.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
